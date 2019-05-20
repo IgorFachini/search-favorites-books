@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  books-mysql:
+    image: mysql:5.7
+    container_name: books-mysql
+    volumes:
+      - ~/Docker/volumes/books/books-mysql:/var/lib/mysql:z
+    environment:
+      - MYSQL_ROOT_PASSWORD=${books_DB_ROOT_PASSWORD:-root}
+      - MYSQL_DATABASE=${books_DB_DATABASE:-books}
+      - MYSQL_USER=${books_DB_USER:-books}
+      - MYSQL_PASSWORD=${books_DB_PASSWORD:-books}
+    ports:
+      - "3306:3306"
+      - "8080:8080"
+
+  # backend:
+  #   image: maven:3.5-jdk-8-alpine
+  #   container_name: backend
+  #   working_dir: /app
+  #   entrypoint:
+  #     - /bin/sh
+  #     - -c
+  #     - "echo -n 'Waiting DB' && until nc -z books-mysql 3306; do echo -n '.'; sleep 2; done && echo '.' && \
+  #       mvn spring-boot:run"
+  #   environment:
+  #     - DB_HOST=books-mysql
+  #     - DB_PORT=3306
+  #     - DB_DATABASE=${books_DB_DATABASE:-books}
+  #     - DB_USER=${books_DB_USER:-books}
+  #     - DB_PASSWORD=${books_DB_PASSWORD:-books}
+  #     - JAVA_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=y
+  #   ports:
+  #     - "8080:8080"
+  #     - "4000:4000"
+  #     - "8082:8082"
+  #     - "5009:5009"
+  #   volumes:
+  #     - ..:/app:z
+  #     - ~/Docker/volumes/m3:/root/.m3:z
+  #   extra_hosts:
+  #     - "books:${HOSTIP}"
+  #   depends_on:
+  #     - books-mysql

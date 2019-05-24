@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  books-mysql:
+    image: mysql:5.7
+    container_name: books-mysql
+    volumes:
+      - ./temp/books-mysql:/var/lib/mysql:z
+    environment:
+      - MYSQL_ROOT_PASSWORD=${books_DB_ROOT_PASSWORD:-root}
+      - MYSQL_DATABASE=${books_DB_DATABASE:-books}
+      - MYSQL_USER=${books_DB_USER:-books}
+      - MYSQL_PASSWORD=${books_DB_PASSWORD:-books}
+    ports:
+      - "3306:3306"
+
+  # frontend:
+  #   image: node:8.7.0-alpine
+  #   build: ./frontend
+  #   container_name: frontend
+  #   command: npm install && npm start
+  #   depends_on:
+  #     - books-mysql
+
+  # backend:
+  #   image: maven:3.5-jdk-8-alpine
+  #   container_name: backend
+  #   build: ./books-backend
+  #   ports:
+  #     - "8082:8082"
+  #   depends_on:
+  #     - books-mysql
+  #   command:  mvn spring-boot:run

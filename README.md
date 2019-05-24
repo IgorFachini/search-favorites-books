@@ -1,4 +1,4 @@
-# CrudJavaTest
+# JavaTest
 
 Pesquisar e salvar livros favoritos utilizando a API da google books para consulta de livros.
 

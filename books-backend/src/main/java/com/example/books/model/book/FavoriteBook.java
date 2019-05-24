@@ -1,7 +1,7 @@
 package com.example.books.model.book;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -11,15 +11,16 @@ public class FavoriteBook {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="member_id")
     private Long id;
-
-    @Column(name="first_name")
-    @NotEmpty(message="* Please Enter First Name")
     private String userId;
-
-    @Column(name="last_name")
-    @NotEmpty(message="* Please Enter Last Name")
     private String googleBookId;
+    private String title;
+    private String authors;
+    private String link;
+    private String imgSmallThumbnail;
+    private String imgThumbnail;
 
+    @Column(length = 4000)
+    @Size(max = 4000)
+    private String description;
 }

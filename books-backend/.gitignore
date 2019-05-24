@@ -24,7 +24,6 @@ HELP.md
 /nbdist/
 /.nb-gradle/
 /build/
-/temp/
 
 ### VS Code ###
 .vscode/
